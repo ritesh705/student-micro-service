@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/ritesh-db-schema
+    username: root
+    password: admin
+
+  application:
+    name: student-service
+
+server:
+  port: 8081
+
+service:
+  address-service:
+    url: http://localhost:8082/api/address
