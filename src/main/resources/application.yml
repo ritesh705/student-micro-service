@@ -12,4 +12,9 @@ server:
 
 service:
   address-service:
-    url: http://localhost:8082/api/address
+    url: http://localhost:8082
+
+eureka:
+  cient:
+    service-url:
+      defaultZone: http://localhost:8761/eureka

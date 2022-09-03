@@ -1,6 +1,7 @@
 package com.ritesh.microservice.service;
 
 import com.ritesh.microservice.entity.Student;
+import com.ritesh.microservice.feignclient.AddressFeignClient;
 import com.ritesh.microservice.repository.StudentRepository;
 import com.ritesh.microservice.request.CreateStudentRequest;
 import com.ritesh.microservice.response.AddressResponse;
@@ -19,6 +20,9 @@ public class StudentService
 	@Autowired
 	WebClient addressWebClient;
 
+	@Autowired
+	AddressFeignClient addressFeignClient;
+
 	public StudentResponse createStudent(CreateStudentRequest createStudentRequest)
 	{
 		StudentResponse response = null;
@@ -36,14 +40,15 @@ public class StudentService
 	public StudentResponse getById (long id)
 	{
 		StudentResponse studentResponse = new StudentResponse(studentRepository.findById(id).get());
-		studentResponse.setAddressResponse(getAddressById(studentResponse.getAddressId()));
+		//studentResponse.setAddressResponse(getAddressById(studentResponse.getAddressId()));
+		studentResponse.setAddressResponse(addressFeignClient.getAddressById(studentResponse.getAddressId()));
 		return studentResponse;
 	}
 
 	public AddressResponse getAddressById(long addressId)
 	{
 		Mono<AddressResponse> response =
-				addressWebClient.get().uri("/getById/"+ addressId)
+				addressWebClient.get().uri("/api/address/getById/"+ addressId)
 						.retrieve()
 						.bodyToMono(AddressResponse.class);
 		return response.block();
