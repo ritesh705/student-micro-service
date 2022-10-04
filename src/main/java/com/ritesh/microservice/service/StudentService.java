@@ -4,8 +4,8 @@ import com.ritesh.microservice.entity.Student;
 import com.ritesh.microservice.feignclient.AddressFeignClient;
 import com.ritesh.microservice.repository.StudentRepository;
 import com.ritesh.microservice.request.CreateStudentRequest;
-import com.ritesh.microservice.response.AddressResponse;
-import com.ritesh.microservice.response.StudentResponse;
+import com.ritesh.microservice.repository.response.AddressResponse;
+import com.ritesh.microservice.repository.response.StudentResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -41,6 +41,8 @@ public class StudentService
 	{
 		StudentResponse studentResponse = new StudentResponse(studentRepository.findById(id).get());
 		//studentResponse.setAddressResponse(getAddressById(studentResponse.getAddressId()));
+		AddressResponse ar = addressFeignClient.getAddressById(studentResponse.getAddressId());
+		String ar1 = addressFeignClient.getAddressStringById(studentResponse.getAddressId());
 		studentResponse.setAddressResponse(addressFeignClient.getAddressById(studentResponse.getAddressId()));
 		return studentResponse;
 	}

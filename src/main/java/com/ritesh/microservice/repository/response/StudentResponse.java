@@ -1,4 +1,4 @@
-package com.ritesh.microservice.response;
+package com.ritesh.microservice.repository.response;
 
 import com.ritesh.microservice.entity.Student;
 

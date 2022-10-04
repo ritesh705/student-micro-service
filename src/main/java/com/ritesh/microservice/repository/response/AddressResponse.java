@@ -1,8 +1,7 @@
-package com.ritesh.microservice.response;
+package com.ritesh.microservice.repository.response;
 
 public class AddressResponse
 {
-
 	private long addressId;
 
 	private String street;
@@ -21,9 +20,9 @@ public class AddressResponse
 		return street;
 	}
 
-	public void setStreet(String street) {
+	/*public void setStreet(String street) {
 		this.street = street;
-	}
+	}*/
 
 	public String getCity() {
 		return city;
@@ -32,5 +31,4 @@ public class AddressResponse
 	public void setCity(String city) {
 		this.city = city;
 	}
-
 }

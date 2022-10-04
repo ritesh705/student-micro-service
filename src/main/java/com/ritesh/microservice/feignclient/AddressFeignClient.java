@@ -1,6 +1,6 @@
 package com.ritesh.microservice.feignclient;
 
-import com.ritesh.microservice.response.AddressResponse;
+import com.ritesh.microservice.repository.response.AddressResponse;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,4 +16,8 @@ public interface AddressFeignClient
 {
     @GetMapping("/getById/{id}")
     AddressResponse getAddressById(@PathVariable Long id);
+
+    /*Mapping Response To String*/
+    @GetMapping("/getById/{id}")
+    String getAddressStringById(@PathVariable Long id);
 }
