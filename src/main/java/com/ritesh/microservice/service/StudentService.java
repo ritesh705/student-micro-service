@@ -40,9 +40,6 @@ public class StudentService
 	public StudentResponse getById (long id)
 	{
 		StudentResponse studentResponse = new StudentResponse(studentRepository.findById(id).get());
-		//studentResponse.setAddressResponse(getAddressById(studentResponse.getAddressId()));
-		AddressResponse ar = addressFeignClient.getAddressById(studentResponse.getAddressId());
-		String ar1 = addressFeignClient.getAddressStringById(studentResponse.getAddressId());
 		studentResponse.setAddressResponse(addressFeignClient.getAddressById(studentResponse.getAddressId()));
 		return studentResponse;
 	}

@@ -15,3 +15,4 @@ public class AddressServiceLoadBalancing
         return Feign.builder();
     }
 }
+
