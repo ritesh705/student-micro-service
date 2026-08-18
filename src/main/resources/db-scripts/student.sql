@@ -1,3 +1,5 @@
+CREATE DATABASE ritesh_db;
+
 DROP TABLE IF EXISTS Student;
 
 CREATE TABLE Student (
@@ -7,6 +9,6 @@ CREATE TABLE Student (
   email varchar(30) DEFAULT NULL,
   address_id int DEFAULT NULL,
   PRIMARY KEY (id)
-)
+);
 
 INSERT INTO `student` VALUES (1,'Raj','Dave','raj_dave@yahoo.com',1),(2,'John','Smith','john_smith@gmail.com',2);
