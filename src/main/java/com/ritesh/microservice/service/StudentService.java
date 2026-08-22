@@ -6,6 +6,7 @@ import com.ritesh.microservice.repository.StudentRepository;
 import com.ritesh.microservice.request.CreateStudentRequest;
 import com.ritesh.microservice.repository.response.AddressResponse;
 import com.ritesh.microservice.repository.response.StudentResponse;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -17,11 +18,11 @@ public class StudentService
 	@Autowired
 	StudentRepository studentRepository;
 
-	@Autowired
-	WebClient addressWebClient;
+	/*@Autowired
+	WebClient addressWebClient;*/
 
 	@Autowired
-	AddressFeignClient addressFeignClient;
+	AddressServiceClient addressServiceClient;
 
 	public StudentResponse createStudent(CreateStudentRequest createStudentRequest)
 	{
@@ -36,20 +37,24 @@ public class StudentService
 		response.setAddressResponse(getAddressById(student.getAddressId()));
 		return response;
 	}
-	
+
 	public StudentResponse getById (long id)
 	{
 		StudentResponse studentResponse = new StudentResponse(studentRepository.findById(id).get());
-		studentResponse.setAddressResponse(addressFeignClient.getAddressById(studentResponse.getAddressId()));
+		studentResponse.setAddressResponse(getAddressById(studentResponse.getAddressId()));
 		return studentResponse;
 	}
 
 	public AddressResponse getAddressById(long addressId)
 	{
+		/*
 		Mono<AddressResponse> response =
 				addressWebClient.get().uri("/api/address/getById/"+ addressId)
 						.retrieve()
 						.bodyToMono(AddressResponse.class);
 		return response.block();
+		*/
+
+		return addressServiceClient.getAddressById(addressId);
 	}
 }
