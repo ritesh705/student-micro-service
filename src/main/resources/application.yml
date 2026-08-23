@@ -1,33 +1,10 @@
-logging:
-  level:
-    root: DEBUG
-
 spring:
   application:
     name: student-service
   profiles:
     active: dev
   config:
-    import: optional:configserver:http://localhost:8888
-#  datasource:
-#    url: jdbc:mysql://localhost:3306/ritesh_db
-#    username: root
-#    password: admin
+    import: optional:configserver:http://localhost:9999
 
 server:
   port: 8081
-
-#service:
-#  address-service:
-#    url: http://localhost:8082
-#
-#eureka:
-#  client:
-#    service-url:
-#      defaultZone: http://localhost:8761/eureka
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
